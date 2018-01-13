@@ -13,14 +13,15 @@ public class RandomDisturbThread extends Thread {
             if (MagicCubeGlobalValue.isRandomDisturbing) {
                 Random random = new Random();
                 int rotateMsg = random.nextInt(18) + 1;
-                MagicCube.RotateMsg rotateMsgEntity = MagicCube.getSingleInstance().translateRotateMsg(rotateMsg);
+                RotateMsg rotateMsgEntity = RotateMsg.translateRotateMsg(rotateMsg);
                 rotateMsgEntity.rotateAngle = rotateMsgEntity.angle;
                 MagicCubeGlobalValue.setInfoBeforeRotating();
-                MagicCube.getSingleInstance().rotateAnimation(rotateMsg, MagicCube.getSingleInstance().glSurfaceView);
+                MagicCubeRotate.rotateAnimation(rotateMsg, MagicCube.getSingleInstance().glSurfaceView);
                 MagicCubeGlobalValue.setInfoAfterRotating();
             } else {
                 break;
             }
         }
+        MagicCubeGlobalValue.setInfoAfterRandomDisturbing();
     }
 }

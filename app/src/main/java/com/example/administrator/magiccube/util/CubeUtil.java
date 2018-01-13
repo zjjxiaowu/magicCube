@@ -4,6 +4,7 @@ import android.opengl.GLU;
 
 import com.example.administrator.magiccube.MagicCube;
 import com.example.administrator.magiccube.MagicCubeRender;
+import com.example.administrator.magiccube.MagicCubeRotate;
 import com.example.administrator.magiccube.MagicCubeText;
 import com.example.administrator.magiccube.constant.Const;
 import com.example.administrator.magiccube.entity.Cube;
@@ -114,21 +115,19 @@ public class CubeUtil {
     }
 
     private static Cube createCubeByRotate(Cube cubeOrigin, float angle, int axis) {
-        MagicCube magicCube = MagicCube.getSingleInstance();
         Cube cube = new Cube();
         cubeOrigin.copyCube(cubeOrigin, cube);
-        magicCube.rotateCubes(Arrays.asList(cube), axis, angle);
-        magicCube.updateCubesFaces(Arrays.asList(cube), axis, angle);
+        MagicCubeRotate.rotateCubes(Arrays.asList(cube), axis, angle);
+        MagicCube.updateCubesFaces(Arrays.asList(cube), axis, angle);
         repairColorAfterRotate(cubeOrigin, cube);
         return cube;
     }
 
     public static Square createSquareByRotate(Square origin, float angle, int axis, float r, float g, float b, float a, int color) {
-        MagicCube magicCube = MagicCube.getSingleInstance();
         Square dest = new Square();
         origin.copySquare(origin, dest);
-        magicCube.rotateSquares(Arrays.asList(dest), axis, angle);
-        magicCube.updateSquaresFaces(Arrays.asList(dest), axis, angle);
+        MagicCubeRotate.rotateSquares(Arrays.asList(dest), axis, angle);
+        MagicCube.updateSquaresFaces(Arrays.asList(dest), axis, angle);
         for (Triangle triangle : dest.getTriangles()) {
             for (Vertex vertex : triangle.getVertices()) {
                 vertex.setColorA(a);

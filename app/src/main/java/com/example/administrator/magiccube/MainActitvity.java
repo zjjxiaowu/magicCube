@@ -174,8 +174,8 @@ public class MainActitvity extends AppCompatActivity {
             Looper.prepare();//1、初始化Looper
             mHandler = new Handler() {//2、绑定handler到CustomThread实例的Looper对象
                 public void handleMessage(Message msg) {//3、定义处理消息的方法
-                    if (msg.what == Const.AUTO_ROTATE_MSG && !MagicCubeGlobalValue.isRandomDisturbing&&!isThreadRunning(randomDisturbThread)) {
-                        if (!MagicCubeGlobalValue.isAutoRotating) {
+                    if (msg.what == Const.AUTO_ROTATE_MSG ) {
+                        if (!MagicCubeGlobalValue.isAutoRotating&& !MagicCubeGlobalValue.isRandomDisturbing&&!isThreadRunning(randomDisturbThread)) {
                             if (autoRotateThread == null || !autoRotateThread.isAlive()) {
                                 MagicCubeGlobalValue.setInfoBeforeAutoRotating();
                                 autoRotateThread = new AutoRotateThread();
@@ -210,7 +210,7 @@ public class MainActitvity extends AppCompatActivity {
     }
     public void userRotating(int rotateMsg) {
         MagicCubeGlobalValue.setInfoBeforeRotating();
-        MagicCube.getSingleInstance().rotateAnimation(rotateMsg, view);
+        MagicCubeRotate.rotateAnimation(rotateMsg, view);
         MagicCube.getSingleInstance().drawCountStep();
         MagicCubeGlobalValue.setInfoAfterRotating();
         MagicCube.getSingleInstance().fillNextStepTipInfo(rotateMsg);

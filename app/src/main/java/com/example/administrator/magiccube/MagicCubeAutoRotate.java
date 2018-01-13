@@ -157,7 +157,7 @@ public class MagicCubeAutoRotate {
     private void rotate(GLSurfaceView view) {
         for (Integer rotateMsg : steps) {
             if (MagicCubeGlobalValue.isAutoRotating) {
-                MagicCube.getSingleInstance().rotateAnimation(rotateMsg, view);
+                MagicCubeRotate.rotateAnimation(rotateMsg, view);
                 MagicCube.getSingleInstance().drawCountStep();
             } else {
                 curStep = 8;
@@ -172,7 +172,6 @@ public class MagicCubeAutoRotate {
 
     private void fillInitSteps(Map<Integer, CubesPlane> cubesPlaneMap) {
         Map<Integer, CubesPlane> map = new HashMap<>();
-        MagicCube magicCube = MagicCube.getSingleInstance();
         CubeUtil.copyCubesPlaneMap(cubesPlaneMap, map);
         List<Integer> localSteps = new ArrayList<>();
         fillSquares(map);
@@ -181,10 +180,10 @@ public class MagicCubeAutoRotate {
         for (int i = 1; i <= 3; i++) {
             int rotateMsg = Const.ROTATE_X_WHOLE_ANTI_CLOCKWISE;
             localSteps.add(rotateMsg);
-            magicCube.rotateCubes(allCubes, Const.X_AXIS, 90f);
-            magicCube.updateCubesFaces(allCubes, Const.X_AXIS, 90f);
+            MagicCubeRotate.rotateCubes(allCubes, Const.X_AXIS, 90f);
+            MagicCube.updateCubesFaces(allCubes, Const.X_AXIS, 90f);
             map.clear();
-            magicCube.fillCubesPlaneMapInfo(allCubes, map);
+            CubeUtil.fillCubesPlaneByCubes(allCubes, map);
             fillSquares(map);
             int _step = getCurrentStep();
             if (_step > step) {
@@ -197,10 +196,10 @@ public class MagicCubeAutoRotate {
         for (int i = 1; i <= 3; i++) {
             int rotateMsg = Const.ROTATE_Z_WHOLE_ANTI_CLOCKWISE;
             localSteps.add(rotateMsg);
-            magicCube.rotateCubes(allCubes, Const.Z_AXIS, 90f);
-            magicCube.updateCubesFaces(allCubes, Const.Z_AXIS, 90f);
+            MagicCubeRotate.rotateCubes(allCubes, Const.Z_AXIS, 90f);
+            MagicCube.updateCubesFaces(allCubes, Const.Z_AXIS, 90f);
             map.clear();
-            magicCube.fillCubesPlaneMapInfo(allCubes, map);
+            CubeUtil.fillCubesPlaneByCubes(allCubes, map);
             fillSquares(map);
             int _step = getCurrentStep();
             if (_step > step) {
